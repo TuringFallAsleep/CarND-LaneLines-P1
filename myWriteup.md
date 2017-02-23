@@ -16,7 +16,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 
-
+![alt text](imagename.png "Title")
 ---
 
 ### Reflection
@@ -24,20 +24,20 @@ The goals / steps of this project are the following:
 ###1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
 My pipeline consisted of 5 steps. First, I converted the images to grayscale.
-[grayscale]: ./test_images/solidWhiteCurve_gray.jpg "Grayscale"
+![grayscale]( ./test_images/solidWhiteCurve_gray.jpg "Grayscale")
 
 Then I use Gaussian smoothing to suppress noise and spurious gradients. 
 
 After that, I use Canny function to find the edge of the picture. 
-[edges]: ./test_images/solidWhiteCurve_edges.jpg
+![edges]( ./test_images/solidWhiteCurve_edges.jpg "Edge")
 
 In step 4, since some structures near or above the road, like streetlights and billboards, where many lines could be detected in next step, I add a mask which makes "road" is the only part of the image can be detected. 
 
 Finally, I use Hough Transformation to identify and paint the lines that stands for the edges of road. 
-[hough]: ./test_images/solidWhiteCurve_hough.jpg
+![hough]( ./test_images/solidWhiteCurve_hough.jpg "Hough Find Line")
 
 And combine it with original image.
-[result]: ./test_images/solidWhiteCurve_lines_edges.jpg
+![result]( ./test_images/solidWhiteCurve_lines_edges.jpg "Result")
 (I don't know why the colour in these two pictures are so weird here. They are good in the result of code)
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by changing the thickness. In 'white.mp4', there is always a supering line shows in the button of the video. So I increase the threshold of Canny function(i.e. enhance the threshold of "being a line"). It is not difficult to annotate solid line as a line because it has already been, but separate line is not. I have turned parameters of Hough Transformation function to ensure minimum number of votes is not too big, maximum gap in pixels bteween connecttable line segments is large enough.
